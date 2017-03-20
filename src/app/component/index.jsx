@@ -4,7 +4,7 @@ import React from 'react';
 import Welcome from './welcome/WelcomeContainer';
 import GistTable from './gist-table/GistTableContainer';
 
-// TODO: form validation, stars, file-upload, error-handling, saga, yesterday gists, tests, refactoring, infinite-scroll
+// TODO: stars, file-upload, error-handling, saga, yesterday gists, tests, refactoring, infinite-scroll
 const Root = () => {
   return (
     <section>

@@ -33,15 +33,19 @@ export default class CreateGistModal extends React.PureComponent {
   render() {
     return (
       this.props.show &&
-      <form className="modalForm" ref={input => this.input = input}>
-        <input placeholder="Description" name="description" required/>
-        <input type="email" placeholder="Email" required/>
-        <File/>
-        <button onClick={(e) => {
+      <form
+        className="modalForm"
+        onSubmit={(e) => {
           e.preventDefault();
           this.handleSubmit();
-        }}>Submit
-        </button>
+        }}
+        ref={input => this.input = input}>
+        <label htmlFor="description">Description:</label>
+        <input id="description" placeholder="Description" name="description" required/>
+        <label htmlFor="email">Email:</label>
+        <input id="email" type="email" placeholder="Email" required pattern="^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
+        <File/>
+        <button type="submit">Submit</button>
       </form>
     );
   }

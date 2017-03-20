@@ -4,11 +4,22 @@
   align-items: flex-start;
 }
 
-.modalForm input,
-.modalForm textarea,
 .modalForm button {
   margin: 5px 0;
 }
+
+.modalForm input,
+.modalForm textarea {
+  margin: 5px 0;
+  border: 1px solid #ddd;
+  padding: 4px 8px;
+}
+
+.modalForm input:focus,
+.modalForm textarea:focus {
+  border: 1px solid #000;
+}
+
 
 .fileSection {
   display: flex;
@@ -20,4 +31,14 @@
   width: 300px;
   height: 100px;
   resize: none;
+}
+
+textarea:required:invalid,
+input:required:invalid {
+  border-right: 4px solid red;
+}
+
+textarea:required:valid,
+input:required:valid {
+  border-right: 4px solid green;
 }
