@@ -1,0 +1,23 @@
+.gistTableContainer {
+  display: flex;
+  justify-content: center;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 500px;
+}
+
+.gistTable {
+  border: 1px solid black;
+  min-width: 600px;
+  width: 100%;
+}
+
+.gistTable td {
+  border: 1px solid black;
+  text-align: center;
+  width: 300px;
+}
+
+.gistTable th {
+  border: 1px solid black;
+}
