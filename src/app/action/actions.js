@@ -9,7 +9,7 @@ const githubAPI = 'https://api.github.com';
 const headers = new Headers({
   'Content-Type': 'application/json',
   'Accept': 'application/vnd.github.v3+json',
-  'Authorization': 'token 321ef5ca3534c9cd47bbe2905e21824e16c044b6',
+  'Authorization': 'token YOUR-TOKEN',
 });
 
 export const createGist = (gist) => {
