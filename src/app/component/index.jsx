@@ -5,7 +5,7 @@ import React from 'react';
 import Welcome from './welcome/WelcomeContainer';
 import GistTable from './gist-table/GistTableContainer';
 
-// TODO: stars?, tests, refactoring, saga, yesterday gists, infinite-scroll, init-server-rendering
+// TODO: stars?, saga?, init-server-rendering?, tests, refactoring + material
 const Root = (props) => {
   return (
     <section>
@@ -16,13 +16,10 @@ const Root = (props) => {
   );
 };
 
-
 const mapStateToProps = (state) => {
   return {
     errors: state.errors.error,
   };
 };
-
-
 
 export default connect(mapStateToProps)(Root);

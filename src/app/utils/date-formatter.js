@@ -2,7 +2,10 @@
 
 const getYesterdayDate = (date) => {
   date.setDate(date.getDate() - 1);
-  return dateFormatter(date);
+  date.setHours(0);
+  date.setMinutes(0);
+  date.setSeconds(0);
+  return date;
 };
 
 export const dateFormatter = (date) => {

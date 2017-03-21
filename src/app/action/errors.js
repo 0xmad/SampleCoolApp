@@ -2,20 +2,20 @@
 
 import * as ErrorTypes from './error-types';
 
-export const fetchGistsFailed = () => {
+export const fetchGistsFailed = (error) => {
   return {
     type: ErrorTypes.FAILED_FETCH_GISTS,
     payload: {
-      errorMessage: 'Cannot fetch',
+      errorMessage: error.message,
     },
   };
 };
 
-export const createGistFailed = () => {
+export const createGistFailed = (error) => {
   return {
     type: ErrorTypes.FAILED_CREATE_GISTS,
     payload: {
-      errorMessage: 'Cannot create gist',
+      errorMessage: error.message,
     },
   };
 };

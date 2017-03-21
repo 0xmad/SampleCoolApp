@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-const Loader = (field) => (Wrapped) => {
+const LoaderWrapper = (field) => (Wrapped) => {
   return class extends React.PureComponent {
     render() {
       return isEmpty(this.props[field]) ? <section>Loading...</section> : <Wrapped {...this.props}/>;
@@ -16,4 +16,4 @@ const isEmpty = (prop) => (
   (prop.constructor === Object && Object.keys(prop).length === 0)
 );
 
-export default Loader;
+export default LoaderWrapper;

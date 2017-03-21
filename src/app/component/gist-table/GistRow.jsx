@@ -10,8 +10,8 @@ export default class Gist extends React.PureComponent {
     return (
       <section className="gistRowContainer">
         <span>{owner ? owner.login : 'Anonymous User'}</span>
-        <span>{description}</span>
-        <span><a target="_tab" href={html_url}>Github link</a></span>
+        <span>{description && description.slice(0, 26)}...</span>
+        <span><a target="_blank" rel="noopener noreferrer nofollow" href={html_url}>Github link</a></span>
         <span>{dateFormatter(updatedDate)}</span>
       </section>
     );

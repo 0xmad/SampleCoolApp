@@ -16,8 +16,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    fetchGists: (owner) => {
-      dispatch(Actions.fetchGistsIfNeeded(owner));
+    fetchGists: (owner, count) => {
+      dispatch(Actions.fetchGistsIfNeeded(owner, count));
     },
   };
 };

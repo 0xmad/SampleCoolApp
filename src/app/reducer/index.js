@@ -25,10 +25,16 @@ const gists = (state = initialState, action) => {
     return Object.assign({}, state, {
       gists: [...state.gists, action.payload],
     });
-  case ActionTypes.RECEIVE_GISTS:
+  case ActionTypes.RECEIVE_GISTS: {
+    const flags = {};
     return Object.assign({}, state, {
-      gists: action.payload,
+      gists: [...state.gists, ...action.payload].filter(gist => {
+        if (flags[gist.id]) return false;
+        flags[gist.id] = true;
+        return true;
+      })
     });
+  }
   default:
     return state;
   }

@@ -47,7 +47,6 @@ export default class InfiniteScroll extends React.Component {
     const totalContainerHeight = el.scrollHeight;
     const containerFixedHeight = el.offsetHeight;
     const bottomScrollPos = topScrollPos + containerFixedHeight;
-
     return (totalContainerHeight - bottomScrollPos);
   }
 
@@ -101,7 +100,7 @@ export default class InfiniteScroll extends React.Component {
   }
 
   renderLoader() {
-    return (this.props.loadingMore && this.props.showLoader) ? this.props.loader : undefined;
+    return this.props.loadingMore && this.props.showLoader && this.props.loader;
   }
 
   _assignHolderClass() {
@@ -112,7 +111,6 @@ export default class InfiniteScroll extends React.Component {
 
   _renderWithTransitions() {
     const allItems = this.props.children.concat(this.props.items);
-
 
     return (
       <ReactCSSTransitionGroup
