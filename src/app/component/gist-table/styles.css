@@ -1,9 +1,6 @@
 .gistTableContainer {
   display: flex;
   justify-content: center;
-  overflow-y: auto;
-  overflow-x: hidden;
-  height: 500px;
 }
 
 .gistTable {
@@ -12,12 +9,24 @@
   width: 100%;
 }
 
-.gistTable td {
+.gistRowContainer,
+.gistTableHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
   border: 1px solid black;
-  text-align: center;
-  width: 300px;
+  padding: 10px;
+}
+.gistTableHeader {
+  background-color: gray;
 }
 
-.gistTable th {
-  border: 1px solid black;
+.gistRowContainer > span {
+  text-align: center;
+  width: 200px;
+}
+
+.gistRowContainer:hover {
+  background-color: rgba(139,140,144,0.41);
 }

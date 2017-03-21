@@ -1,29 +1,18 @@
 'use strict';
 
 import React from 'react';
-import Gist from './GistRow';
-import LoaderWrapper from '../wrapper/LoaderWrapper';
+import GistRow from './GistRow';
+import InfiniteScroll from '../infinite-scroll/InfiniteScroll';
 import './styles.css';
 
-const TableContent = LoaderWrapper('gists')(({gists}) => {
-  return (
-    <table className="gistTable">
-      <thead>
-      <tr>
-        <th>User</th>
-        <th>Description</th>
-        <th>URL</th>
-        <th>Last updated</th>
-      </tr>
-      </thead>
-      <tbody>
-      {gists.map(gist => <Gist key={gist.id} gist={gist}/>)}
-      </tbody>
-    </table>
-  );
-});
-
 export default class GistTable extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      loadingMore: false
+    };
+  }
+
   componentDidMount() {
     const {selectedConversation} = this.props;
     this.props.fetchGists(selectedConversation);
@@ -36,12 +25,43 @@ export default class GistTable extends React.PureComponent {
     }
   }
 
+  _createData() {
+    return this.props.gists.map(gist => <GistRow key={gist.id} gist={gist}/>);
+  }
+
+  _loadMore() {
+    this.setState({loadingMore: true});
+    const {selectedConversation} = this.props;
+    this.props.fetchGists(selectedConversation);
+    this.setState({loadingMore: false});
+  }
+
   render() {
     return (
       <section className="gistTableContainer">
-        <TableContent
-          gists={this.props.gists}/>
+        <section className="gistTable">
+          <TableHeader/>
+          <InfiniteScroll
+            loadMore={this._loadMore.bind(this)}
+            hasMore={true}
+            loadingMore={this.state.loadingMore}
+            showLoader={true}
+            threshold={50}
+            containerHeight={200}
+            animateItems={true}
+            items={this._createData()}
+          />
+        </section>
       </section>
     );
   }
 }
+
+const TableHeader = () => (
+  <section className="gistTableHeader">
+    <span>User</span>
+    <span>Description</span>
+    <span>URL</span>
+    <span>Last updated</span>
+  </section>
+);

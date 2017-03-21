@@ -17,24 +17,28 @@ export default class CreateGistModal extends React.PureComponent {
   handleSubmit() {
     if (this.input.checkValidity()) {
       const description = this.input.description.value;
+      const createdGist = {
+        description,
+      };
       const files = {};
-      // TODO: refactoring
       for (let file of this.input.files.files) {
         const reader = new FileReader();
         reader.onloadend = (event) => {
-          const result = event.target.result;
-          files[file.name] = {filename: file.name, content: result};
-          if (Object.keys(files).length === this.input.files.files.length) {
-            this.props.createGist({
-              description,
-              public: true,
-              files: files
-            });
-            this.input.reset();
-          }
+          files[file.name] = {filename: file.name, content: event.target.result};
+          this.createGist(files, createdGist);
         };
         reader.readAsText(file, 'UTF-8');
       }
+    }
+  }
+
+  createGist(files, createdGist) {
+    if (Object.keys(files).length === this.input.files.files.length) {
+      this.props.createGist(Object.assign({}, createdGist, {
+        public: true,
+        files: files,
+      }));
+      this.input.reset();
     }
   }
 
