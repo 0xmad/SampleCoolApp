@@ -2,21 +2,21 @@
 
 import React from 'react';
 import CreateGistModal from '../create-gist-modal/CreateGistModalContainer';
-import YesterdayDateFormatter from '../../utils/date-formatter';
+import {dateFormatter} from '../../utils/date-formatter';
 import './styles.css';
 
 export default class Welcome extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      yesterdayDate: YesterdayDateFormatter(new Date()),
+      yesterdayDate: dateFormatter(new Date()),
       showModal: false,
     };
   }
 
   componentWillReceiveProps() {
     this.setState(Object.assign({}, this.state, {
-      yesterdayDate: YesterdayDateFormatter(new Date())
+      yesterdayDate: dateFormatter(new Date())
     }));
   }
 

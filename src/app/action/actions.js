@@ -1,9 +1,11 @@
 'use strict';
 
 import * as ActionTypes from './action-types';
+import * as Errors from './errors';
 import fetchWithRetry from '../utils/fetch-with-retry';
 
 const githubAPI = 'https://api.github.com';
+// const owner = 'tmbrlkV';
 const headers = new Headers({
   'Content-Type': 'application/json',
   'Accept': 'application/vnd.github.v3+json',
@@ -14,7 +16,14 @@ export const createGist = (gist) => {
   return dispatch => {
     // noinspection JSUnresolvedFunction
     return fetchWithRetry(`${githubAPI}/gists`, {method: 'POST', headers, body: JSON.stringify(gist)})
-      .then(response => response.json())
+      .then(response => {
+        if (!response.ok) {
+          dispatch(Errors.createGistFailed());
+          return;
+        }
+        return response.json();
+      })
+      .catch(() => dispatch(Errors.createGistFailed()))
       .then(json =>
         dispatch({
           type: ActionTypes.CREATE_GIST,
@@ -24,30 +33,20 @@ export const createGist = (gist) => {
   };
 };
 
-const fetchGists = (owner = 'potherca') => {
+const fetchGists = () => {
   return dispatch => {
     // dispatch(requestMessages(conversation));
     // noinspection JSUnresolvedFunction
-    return fetchWithRetry(`${githubAPI}/users/${owner}/gists`, {method: 'GET', headers})
-      .then(response => response.json())
-      .catch(() => [])
+    return fetchWithRetry(`${githubAPI}/gists`, {method: 'GET', headers})
+      .then(response => {
+        if (!response.ok) {
+          dispatch(Errors.fetchGistsFailed());
+          return;
+        }
+        return response.json();
+      })
+      .catch(() => dispatch(Errors.fetchGistsFailed()))
       .then(json => dispatch(receiveGists(json)));
-  };
-};
-
-const fetchRepositoryInfo = (repository, owner = 'potherca') => {
-  return dispatch => {
-    // noinspection JSUnresolvedFunction
-    return fetch(`${githubAPI}/repos/${owner}/${repository}`, {method: 'GET', headers})
-      .then(response => response.json())
-      .then(json => dispatch(getRepositoryInfo(json)));
-  };
-};
-
-const getRepositoryInfo = (json) => {
-  return {
-    type: ActionTypes.GET_REPOSITORY_INFO,
-    payload: json,
   };
 };
 
@@ -58,26 +57,17 @@ const receiveGists = (json) => {
   };
 };
 
-export const fetchGistsIfNeeded = (owner) => {
+export const fetchGistsIfNeeded = () => {
   return (dispatch, getState) => {
-    if (shouldFetch(getState(), owner)) {
-      return dispatch(fetchGists(owner));
-    }
-  };
-};
-export const fetchRepositoryInfoIfNeeded = (repository, owner) => {
-  return (dispatch, getState) => {
-    if (shouldFetch(getState(), owner)) {
-      return dispatch(fetchRepositoryInfo(repository, owner));
+    if (shouldFetch(getState())) {
+      return dispatch(fetchGists());
     }
   };
 };
 
-const shouldFetch = (state, owner) => {
+const shouldFetch = (state) => {
   // const gists = state.gistsByOwner[owner];
-  // if (!gists) {
-  return true;
-  // } else if (gists.isFetching) {
+  return !!state;
   //   return false;
   // } else {
   //   return gists.didInvalidate;

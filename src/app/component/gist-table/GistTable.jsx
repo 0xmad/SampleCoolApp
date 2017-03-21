@@ -5,7 +5,7 @@ import Gist from './GistRow';
 import LoaderWrapper from '../wrapper/LoaderWrapper';
 import './styles.css';
 
-const TableContent = LoaderWrapper('gists')(({gists, fetchRepositoryInfo}) => {
+const TableContent = LoaderWrapper('gists')(({gists}) => {
   return (
     <table className="gistTable">
       <thead>
@@ -14,11 +14,10 @@ const TableContent = LoaderWrapper('gists')(({gists, fetchRepositoryInfo}) => {
         <th>Description</th>
         <th>URL</th>
         <th>Last updated</th>
-        <th>Stars</th>
       </tr>
       </thead>
       <tbody>
-      {gists.map(gist => <Gist key={gist.id} gist={gist} getRepos={fetchRepositoryInfo}/>)}
+      {gists.map(gist => <Gist key={gist.id} gist={gist}/>)}
       </tbody>
     </table>
   );
@@ -41,8 +40,7 @@ export default class GistTable extends React.PureComponent {
     return (
       <section className="gistTableContainer">
         <TableContent
-          gists={this.props.gists}
-          fetchRepositoryInfo={this.props.fetchRepositoryInfo}/>
+          gists={this.props.gists}/>
       </section>
     );
   }

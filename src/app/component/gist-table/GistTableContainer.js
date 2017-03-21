@@ -10,7 +10,7 @@ const getLongTime = (date) => new Date(date).getTime();
 
 const mapStateToProps = (state) => {
   return {
-    gists: state.gists.concat().sort(byTime),
+    gists: state.gists.gists.concat().sort(byTime),
   };
 };
 
@@ -18,9 +18,6 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchGists: (owner) => {
       dispatch(Actions.fetchGistsIfNeeded(owner));
-    },
-    fetchRepositoryInfo: (repository, owner) => {
-      dispatch(Actions.fetchRepositoryInfoIfNeeded(repository, owner));
     },
   };
 };

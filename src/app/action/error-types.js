@@ -1,0 +1,4 @@
+'use strict';
+
+export const FAILED_FETCH_GISTS = 'FAILED_FETCH_GISTS';
+export const FAILED_CREATE_GISTS = 'FAILED_CREATE_GISTS';

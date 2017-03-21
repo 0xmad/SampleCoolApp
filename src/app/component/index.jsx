@@ -1,17 +1,28 @@
 'use strict';
 
+import {connect} from 'react-redux';
 import React from 'react';
 import Welcome from './welcome/WelcomeContainer';
 import GistTable from './gist-table/GistTableContainer';
 
-// TODO: stars, file-upload, error-handling, saga, yesterday gists, tests, refactoring, infinite-scroll
-const Root = () => {
+// TODO: stars?, tests, refactoring, saga, yesterday gists, infinite-scroll, init-server-rendering
+const Root = (props) => {
   return (
     <section>
       <Welcome/>
+      {props.errors && <div>There is an error: {props.errors.errorMessage}</div>}
       <GistTable/>
     </section>
   );
 };
 
-export default Root;
+
+const mapStateToProps = (state) => {
+  return {
+    errors: state.errors.error,
+  };
+};
+
+
+
+export default connect(mapStateToProps)(Root);
