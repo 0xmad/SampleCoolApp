@@ -1,17 +1,18 @@
 'use strict';
 /* global module */
 /* global process */
-
 import {createStore, applyMiddleware} from 'redux';
-import thunkMiddleware from 'redux-thunk';
+import createSagaMiddleware from 'redux-saga';
+import rootSaga from '../saga';
 import rootReducer from '../reducer';
 
+const sagaMiddleware = createSagaMiddleware();
 const configureStore = (initialState) => {
   const store = createStore(
     rootReducer,
     initialState,
     applyMiddleware(
-      thunkMiddleware
+      sagaMiddleware
     )
   );
   if (module.hot && process.env.NODE_ENV !== 'prod') {
@@ -19,6 +20,7 @@ const configureStore = (initialState) => {
       store.replaceReducer(initialState);
     });
   }
+  sagaMiddleware.run(rootSaga);
   return store;
 };
 

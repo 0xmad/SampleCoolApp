@@ -5,7 +5,7 @@ import React from 'react';
 import Welcome from './welcome/WelcomeContainer';
 import GistTable from './gist-table/GistTableContainer';
 
-// TODO: stars?, saga?, init-server-rendering?, tests, refactoring + material
+// TODO: stars?, tests, refactoring + material
 const Root = (props) => {
   return (
     <section>

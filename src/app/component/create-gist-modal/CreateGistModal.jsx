@@ -52,7 +52,8 @@ export default class CreateGistModal extends React.PureComponent {
             }}
             ref={input => this.input = input}>
         <InputSection/>
-        <button type="submit">Submit</button>
+        <button type="submit" disabled={this.props.loading}>Submit</button>
+        {this.props.loading && <section>Loading gists...</section>}
       </form>
     );
   }

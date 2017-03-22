@@ -6,6 +6,7 @@ import Welcome from './Welcome';
 
 const mapStateToProps = (state) => {
   return {
+    ownerLogin: state.selectedOwner,
     gists: state.gists,
   };
 };

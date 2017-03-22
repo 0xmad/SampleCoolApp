@@ -40,7 +40,7 @@ module.exports = () => {
         {
           test: /\.jsx?$/,
           use: [
-            {loader: 'babel-loader', options: {presets: ['es2015', 'react']}}
+            {loader: 'babel-loader', options: {presets: ['es2015', 'react', 'stage-2']}}
           ],
           exclude: [/node_modules/, /\.(spec|e2e)\.jsx?$/],
 

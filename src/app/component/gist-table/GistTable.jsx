@@ -8,13 +8,13 @@ import './styles.css';
 
 const WrappedInfiniteScroll = LoaderWrapper('items')(InfiniteScroll);
 const config = {gistCountInit: 1, gistCountIncrement: 1};
+
 export default class GistTable extends React.PureComponent {
   constructor(props) {
     super(props);
     this.state = {
       loadingMore: false,
       gistCount: config.gistCountInit,
-      previousGistsLength: 0,
     };
   }
 
@@ -28,7 +28,13 @@ export default class GistTable extends React.PureComponent {
       const {selectedGist} = nextProps;
       this.props.fetchGists(selectedGist, this.state.gistCount);
     }
-    this.setState({loadingMore: false, previousGistsLength: this.props.gists.length});
+    if (this.props.loading && this.state.loadingMore) {
+      this.setState({loadingMore: false});
+    }
+  }
+
+  componentWillUnmount() {
+    this.id && clearTimeout(this.id);
   }
 
   _createData() {

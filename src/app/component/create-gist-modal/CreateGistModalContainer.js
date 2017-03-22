@@ -6,7 +6,7 @@ import CreateGistModal from './CreateGistModal';
 
 const mapStateToProps = (state) => {
   return {
-    gists: state.gists,
+    loading: state.gists.loading,
   };
 };
 
