@@ -14,7 +14,8 @@ const InputSection = () => (
 );
 
 export default class CreateGistModal extends React.PureComponent {
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault();
     if (this.input.checkValidity()) {
       const description = this.input.description.value;
       const createdGist = {
@@ -46,10 +47,7 @@ export default class CreateGistModal extends React.PureComponent {
     return (
       this.props.show &&
       <form className="modalForm"
-            onSubmit={(e) => {
-              e.preventDefault();
-              this.handleSubmit(e);
-            }}
+            onSubmit={this.handleSubmit.bind(this)}
             ref={input => this.input = input}>
         <InputSection/>
         <button type="submit" disabled={this.props.loading}>Submit</button>

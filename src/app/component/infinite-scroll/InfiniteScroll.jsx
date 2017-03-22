@@ -183,7 +183,7 @@ InfiniteScroll.defaultProps = {
   loadingMore: false,
   loader: <div style={{textAlign: 'center'}}>Loading...</div>,
   showLoader: true,
-  holderType: 'div',
+  holderType: 'section',
   children: [],
   items: [],
   animateItems: false,

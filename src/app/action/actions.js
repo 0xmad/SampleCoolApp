@@ -16,9 +16,9 @@ export const createGist = (gist) => {
   };
 };
 
-export const createdGist = (gist) => {
+export const gistCreated = (gist) => {
   return {
-    type: ActionTypes.CREATED_GIST,
+    type: ActionTypes.GIST_CREATED,
     payload: gist,
   };
 };

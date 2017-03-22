@@ -1,10 +1,11 @@
 'use strict';
 
-import {take, put, call, fork} from 'redux-saga/effects';
+import {take, put, call, fork, select} from 'redux-saga/effects';
 import * as Api from '../api';
 import * as ActionTypes from '../action/action-types';
 import * as Actions from '../action/actions';
-
+import * as Selectors from '../reducer/selectors';
+import * as Errors from '../action/errors';
 
 export function fetchGistsApi(owner, count) {
   return Api.fetchGists(owner, count);
@@ -12,7 +13,11 @@ export function fetchGistsApi(owner, count) {
 
 export function* fetchGists(owner, count) {
   const gists = yield call(fetchGistsApi, owner, count);
-  yield put(Actions.receiveGists(gists));
+  if (gists.type !== 'error') {
+    yield put(Actions.receiveGists(gists));
+  } else {
+    yield put(Errors.fetchGistsFailed(gists.error));
+  }
 }
 
 export function createGistApi(gist) {
@@ -21,7 +26,11 @@ export function createGistApi(gist) {
 
 export function* createGist(gist) {
   const created = yield call(createGistApi, gist);
-  yield put(Actions.createdGist(created));
+  if (created.type !== 'error') {
+    yield put(Actions.gistCreated(created));
+  } else {
+    yield put(Errors.createGistFailed(created.error));
+  }
 }
 
 const cond = true;
@@ -40,7 +49,13 @@ function* watchGistCreation() {
   }
 }
 
+export function* startup() {
+  const selectedOwner = yield select(Selectors.selectedOwner);
+  yield fork(fetchGists, selectedOwner, 1);
+}
+
 const root = function* root() {
+  yield fork(startup);
   yield [
     fork(watchGistsLoading),
     fork(watchGistCreation),

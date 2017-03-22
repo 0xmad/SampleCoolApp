@@ -18,23 +18,10 @@ export default class GistTable extends React.PureComponent {
     };
   }
 
-  componentDidMount() {
-    const {selectedGist} = this.props;
-    this.props.fetchGists(selectedGist, this.state.gistCount);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.selectedGist !== this.props.selectedGist) {
-      const {selectedGist} = nextProps;
-      this.props.fetchGists(selectedGist, this.state.gistCount);
-    }
+  componentWillReceiveProps() {
     if (this.props.loading && this.state.loadingMore) {
       this.setState({loadingMore: false});
     }
-  }
-
-  componentWillUnmount() {
-    this.id && clearTimeout(this.id);
   }
 
   _createData() {

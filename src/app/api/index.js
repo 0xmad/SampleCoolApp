@@ -8,13 +8,18 @@ const owner = 'tmbrlkV';
 const headers = new Headers({
   'Content-Type': 'application/json',
   'Accept': 'application/vnd.github.v3+json',
-  // 'Authorization': 'token YOUR_TOKEN',
+  'Authorization': 'token YOUR_TOKEN',
 });
 
 export const createGist = (gist) => {
   // noinspection JSUnresolvedFunction
   return fetchWithRetry(`${githubAPI}/gists`, {method: 'POST', headers, body: JSON.stringify(gist)})
-    .then(response => response.json());
+    .then(response => response.json(), err => {
+      return {
+        type: 'error',
+        error: err,
+      };
+    });
 };
 
 const perPage = 20;
@@ -24,5 +29,10 @@ export const fetchGists = (user = owner, count = 1) => {
   const perPageCount = `page=${count}&per_page=${perPage}`;
   // noinspection JSUnresolvedFunction
   return fetchWithRetry(`${githubAPI}/gists/public?${perPageCount}&${sinceYesterday}`, {method: 'GET', headers})
-    .then(response => response.json());
+    .then(response => response.json(), err => {
+      return {
+        type: 'error',
+        error: err,
+      };
+    });
 };
