@@ -11,7 +11,6 @@ import ReactDOM from 'react-dom';
 import Root from '../component';
 import configureStore from '../store';
 
-
 const store = configureStore();
 
 ReactDOM.render(

@@ -47,19 +47,23 @@ export default class Welcome extends React.PureComponent {
             </Button>
           </Cell>
         </Grid>
-        <Dialog open={this.state.showModal}>
-          <DialogTitle>Create Gist</DialogTitle>
-          <DialogContent>
-            <CreateGistModal handleClose={this.handleClick}/>
-          </DialogContent>
-          <DialogActions>
-            <Button
-              onClick={this.handleClick}>
-              Close
-            </Button>
-          </DialogActions>
-        </Dialog>
+        {
+          this.state.showModal &&
+          <Dialog open={this.state.showModal}>
+            <DialogTitle>Create Gist</DialogTitle>
+            <DialogContent>
+              <CreateGistModal handleClose={this.handleClick}/>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={this.handleClick}>
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
+        }
       </header>
+
     );
   }
 }
