@@ -1,3 +1,3 @@
 'use strict';
 
-export const selectedOwner = (state) => state.selectedOwner;
+export const selectedOwner = (state) => state.selectedOwner || 'tmbrlkV';
