@@ -1,15 +1,27 @@
 'use strict';
 
 import React from 'react';
+import {Button, Textfield} from 'react-mdl';
+import {Spinner} from 'react-mdl';
 import './styles.css';
 
 const InputSection = () => (
   <section className="inputSection">
-    <label htmlFor="description">Description:</label>
-    <input id="description" placeholder="Description" name="description" required/>
-    <label htmlFor="email">Email:</label>
-    <input id="email" type="email" placeholder="Email" required pattern="^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$"/>
-    <input type="file" name="files" multiple required/>
+    <Textfield
+      label="Description"
+      name="description"
+      floatingLabel
+      required/>
+    <Textfield
+      type="email"
+      label="Email"
+      floatingLabel
+      required
+      pattern="^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+    />
+    <section>
+      <input className="fileSection" type="file" name="files" multiple required/>
+    </section>
   </section>
 );
 
@@ -45,14 +57,20 @@ export default class CreateGistModal extends React.PureComponent {
 
   render() {
     return (
-      this.props.show &&
       <form className="modalForm"
             onSubmit={this.handleSubmit.bind(this)}
             ref={input => this.input = input}>
         <InputSection/>
-        <button type="submit" disabled={this.props.loading}>Submit</button>
-        {this.props.loading && <section>Loading gists...</section>}
+        <Button type="submit"
+                disabled={this.props.loading}
+                colored
+                raised>Submit</Button>
+        {this.props.loading && <Spinner className="spinner" singleColor/>}
       </form>
     );
   }
 }
+
+CreateGistModal.propTypes = {
+  handleClose: React.PropTypes.func.isRequired,
+};

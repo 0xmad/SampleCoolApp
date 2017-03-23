@@ -8,7 +8,7 @@ const owner = 'tmbrlkV';
 const headers = new Headers({
   'Content-Type': 'application/json',
   'Accept': 'application/vnd.github.v3+json',
-  'Authorization': 'token YOUR_TOKEN',
+  // 'Authorization': 'token YOUR_TOKEN',
 });
 
 export const createGist = (gist) => {

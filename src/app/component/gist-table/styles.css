@@ -20,6 +20,8 @@
 }
 .gistTableHeader {
   background-color: gray;
+  color: white;
+  text-transform: uppercase;
 }
 
 .gistRowContainer > span {

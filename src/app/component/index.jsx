@@ -4,8 +4,10 @@ import {connect} from 'react-redux';
 import React from 'react';
 import Welcome from './welcome/WelcomeContainer';
 import GistTable from './gist-table/GistTableContainer';
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material.js';
 
-// TODO: stars?, tests, refactoring + material + internationalization
+// TODO: internationalization
 const Root = (props) => {
   return (
     <section>

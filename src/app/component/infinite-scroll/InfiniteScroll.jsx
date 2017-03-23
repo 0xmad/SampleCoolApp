@@ -4,6 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {topPosition, leftPosition} from '../../utils/position-utils';
+import {Spinner, Cell, Grid} from 'react-mdl';
 
 export default class InfiniteScroll extends React.Component {
   constructor(props) {
@@ -173,6 +174,13 @@ InfiniteScroll.propTypes = {
   transitionAppearTimeout: React.PropTypes.number,
 };
 
+const loader =
+  <Grid>
+    <Cell col={6} align="middle" offset={6}>
+      <Spinner singleColor/>
+    </Cell>
+  </Grid>;
+
 InfiniteScroll.defaultProps = {
   className: '',
   elementIsScrollable: true,
@@ -181,7 +189,7 @@ InfiniteScroll.defaultProps = {
   horizontal: false,
   hasMore: true,
   loadingMore: false,
-  loader: <div style={{textAlign: 'center'}}>Loading...</div>,
+  loader: loader,
   showLoader: true,
   holderType: 'section',
   children: [],

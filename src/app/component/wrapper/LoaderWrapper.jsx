@@ -1,11 +1,18 @@
 'use strict';
 
 import React from 'react';
+import {Spinner, Grid, Cell} from 'react-mdl';
 
 const LoaderWrapper = (field) => (Wrapped) => {
   return class extends React.PureComponent {
     render() {
-      return isEmpty(this.props[field]) ? <section>Loading...</section> : <Wrapped {...this.props}/>;
+      const loader =
+        <Grid>
+          <Cell col={6} align="middle" offset={6}>
+            <Spinner singleColor/>
+          </Cell>
+        </Grid>;
+      return isEmpty(this.props[field]) ? loader : <Wrapped {...this.props}/>;
     }
   };
 };
