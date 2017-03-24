@@ -5,25 +5,41 @@ import {Button, Textfield} from 'react-mdl';
 import {Spinner} from 'react-mdl';
 import './styles.css';
 
-const InputSection = () => (
-  <section className="inputSection">
-    <Textfield
-      label="Description"
-      name="description"
-      floatingLabel
-      required/>
-    <Textfield
-      type="email"
-      label="Email"
-      floatingLabel
-      required
-      pattern="^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
-    />
-    <section>
-      <input className="fileSection" type="file" name="files" multiple required/>
-    </section>
-  </section>
-);
+class InputSection extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {label: ''};
+  }
+  render() {
+    return (
+      <section className="inputSection">
+        <Textfield
+          label="Description"
+          name="description"
+          floatingLabel
+          required/>
+        <Textfield
+          type="email"
+          label="Email"
+          floatingLabel
+          required
+          pattern="^[a-z0-9._-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+        />
+        <section>
+          <input
+            onChange={(e) => {
+              this.setState({label: e.target.files.length});
+            }}
+            className="inputFile inputFile-6" id="file" type="file"
+            name="files" multiple required/>
+          <label ref={label => this.label = label} htmlFor="file">
+            <strong>{this.state.label &&  `${this.state.label} file chosen` || 'Choose files'}</strong>
+          </label>
+        </section>
+      </section>
+    );
+  }
+}
 
 export default class CreateGistModal extends React.PureComponent {
   handleSubmit(e) {

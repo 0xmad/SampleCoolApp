@@ -5,3 +5,88 @@
 .spinner {
   margin-left: 20px;
 }
+*,
+*:after,
+*:before {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.inputFile {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.inputFile + label {
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  cursor: pointer;
+  display: inline-block;
+  overflow: hidden;
+  padding: 0.625rem 1.25rem;
+}
+
+.inputFile:focus + label,
+.inputFile.has-focus + label {
+  outline: 1px dotted #000;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.inputFile + label * {
+   pointer-events: none;
+}
+
+.inputFile + label svg {
+  width: 1em;
+  height: 1em;
+  vertical-align: middle;
+  fill: currentColor;
+  margin-top: -0.25em;
+  margin-right: 0.25em;
+}
+
+.inputFile-6 + label {
+  color: #d3394c;
+}
+
+.inputFile-6 + label {
+  border: 1px solid #d3394c;
+  background-color: #f1e5e6;
+  padding: 0;
+}
+
+.inputFile-6:focus + label,
+.inputFile-6.has-focus + label,
+.inputFile-6 + label:hover {
+  border-color: #722040;
+}
+
+.inputFile-6 + label span,
+.inputFile-6 + label strong {
+  padding: 0.625rem 1.25rem;
+}
+
+.inputFile-6 + label strong {
+  height: 100%;
+  color: #f1e5e6;
+  background-color: #d3394c;
+  display: inline-block;
+}
+
+.inputFile-6:focus + label strong,
+.inputFile-6.has-focus + label strong,
+.inputFile-6 + label:hover strong {
+  background-color: #722040;
+}
+
+@media screen and (max-width: 50em) {
+  .inputFile-6 + label strong {
+    display: block;
+  }
+}
