@@ -49,7 +49,7 @@ export default class GistTable extends React.PureComponent {
             loadingMore={this.state.loadingMore}
             showLoader={true}
             threshold={50}
-            containerHeight={420}
+            containerHeight={620}
             animateItems={true}
             items={this._createData()}
           />
